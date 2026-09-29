@@ -5,7 +5,7 @@ import Layout, { siteTitle } from '../components/layout';
 // Bring in CSS Module class names (hashed at build time) from utils.module.css
 import utilStyles from '../styles/utils.module.css';
 // Bring in the helper that reads markdown files and returns posts sorted by date
-import { getSortedPostsData } from '../lib/posts-json';
+import { getSortedPostsData } from '../lib/posts-firebase';
 // Bring in Next.js Link for client-side navigation between pages
 import Link from 'next/link';
 // Bring in the Date component that formats a post's date string
@@ -16,7 +16,7 @@ import Date from '../components/date';
 // Next.js calls this at build time to load data before the Home page is rendered
 export async function getStaticProps() {
   // Read every markdown post and get an array of { id, date, title } objects
-  const allPostsData = getSortedPostsData();
+  const allPostsData = await getSortedPostsData();
   // Send that array back to Next.js so it can pass it into the Home component
   return {
     // props is the object Next.js injects as arguments to Home

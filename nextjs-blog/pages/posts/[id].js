@@ -5,7 +5,7 @@ import Head from 'next/head';
 // Bring in the shared Layout wrapper used around the post content
 import Layout from '../../components/layout';
 // Bring in helpers: getAllPostIds lists every post, getPostData loads one post
-import { getAllPostIds, getPostData } from '../../lib/posts-json';
+import { getAllPostIds, getPostData } from '../../lib/posts-firebase';
 // Bring in the Date component that formats a post's date string
 import Date from '../../components/date';
 
@@ -48,7 +48,7 @@ export default function Post({ postData }) {
 // Next.js calls this at build time to learn which /posts/[id] URLs to pre-render
 export async function getStaticPaths() {
   // Build the list of path objects, each shaped like { params: { id: 'file-name' } }
-  const paths = getAllPostIds();
+  const paths = await getAllPostIds();
   // Tell Next.js which routes exist and how to handle unknown ids
   return {
     // Same as paths: paths — each entry becomes a static HTML page
